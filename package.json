@@ -1,0 +1,22 @@
+{
+  "name": "simplekoa",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/2499545982/simpleKoa.git"
+  },
+  "author": "fuck",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/2499545982/simpleKoa/issues"
+  },
+  "homepage": "https://github.com/2499545982/simpleKoa#readme",
+  "dependencies": {
+    "typescript": "^4.9.5"
+  }
+}
