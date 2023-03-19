@@ -1,0 +1,947 @@
+{
+    "env": {
+        "es6": true,
+        "node": true,
+    },
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+        "@typescript-eslint"
+    ],
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking"
+    ],
+    "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly"
+    },
+    "parserOptions": {
+        "ecmaVersion": 2020,
+        "sourceType": "module",
+        "project": "tsconfig.json",
+        "tsconfigRootDir": "."
+    },
+    "ignorePatterns": [
+        "node_modules/",
+        "output/",
+        "**/*.js"
+    ],
+    "rules": {
+
+        /**
+         * 建议不在生产环境使用 `console`，而是调用 `logger` 方法
+         *
+         * `console` 应当只在开发调试阶段使用
+         *
+         * @default ["off"]
+         */
+        "no-console": ["warn"],
+
+        /**
+         * 建议不使用空的语句块，这通常是没有必要的
+         *
+         * @default ["error"]
+         */
+        "no-empty": ["warn"],
+
+        /**
+         * 建议不进行非必要的布尔类型转换，以降低性能损耗和阅读成本
+         *
+         * @default ["error"]
+         */
+        "no-extra-boolean-cast": ["warn"],
+
+        /**
+         * 建议不使用非必要的分号，以降低阅读成本
+         *
+         * @default ["error"]
+         */
+        "no-extra-semi": ["off"],
+        "@typescript-eslint/no-extra-semi": ["warn"],
+
+        /**
+         * 建议不在常规字符串中出现模版字面量占位符语法，这可能是忽略了引号导致的错误
+         *
+         * @default ["off"]
+         */
+        "no-template-curly-in-string": ["warn"],
+
+        /**
+         * 建议定义 `setter` 时也定义配套的 `getter`
+         *
+         * @default ["off"]
+         */
+        "accessor-pairs": ["warn"],
+
+        /**
+         * 建议数组方法的回调函数中有 `return` 语句
+         *
+         * @default ["off"]
+         */
+        "array-callback-return": ["warn"],
+
+        /**
+         * 建议将代码路径条数（复杂度）限制在 20 条以内，即一个 `if else` 语句中最多包含 20 条分支
+         *
+         * 如果分支过多，建议使用 `switch` 或其他方法实现
+         *
+         * @default ["off"]
+         */
+        "complexity": ["warn"],
+
+        /**
+         * 建议使用一致的 `return` 语句，即如果 `if` 分支中返回了值，则所有的分支都应当显式返回值
+         *
+         * @default ["off"]
+         */
+        "consistent-return": ["warn"],
+
+        /**
+         * 强制所有语句块使用大括号，避免语法错误
+         *
+         * @default ["off"]
+         */
+        "curly": ["error"],
+
+        /**
+         * 强制 `switch` 语句中有 `default` 分支，避免出现忘记默认分支的情况
+         *
+         * @default ["off"]
+         */
+        "default-case": ["error"],
+
+        /**
+         * 建议点号和操作符在同一行以增强可读性
+         *
+         * @default ["off"]
+         */
+        "dot-location": ["warn", "property"],
+
+        /**
+         * 建议尽可能的使用点号而非动态访问符
+         *
+         * @default ["off"]
+         */
+        "dot-notation": ["off"],
+        "@typescript-eslint/dot-notation": ["warn"],
+
+        /**
+         * 建议使用严格相等 `===` 而非隐式相等 `==`
+         *
+         * @default ["off"]
+         */
+        "eqeqeq": ["warn"],
+
+        /**
+         * 强制在 `for-in` 语句中使用 `Object.prototype.hasOwnProperty.call(object, key)` 确定键值存在
+         *
+         * `for-in` 语句会将对象原型上的属性也遍历下来，如果不做属性检查，可能会导致预期之外的错误
+         *
+         * @default ["off"]
+         */
+        "guard-for-in": ["error"],
+
+        /**
+         * 禁止调用 `alert` 等浏览器环境的 API
+         *
+         * @default ["off"]
+         */
+        "no-alert": ["error"],
+
+        /**
+         * 禁止调用 `Arguments.caller` 和 `Arguments.callee`，该 API 已被废弃
+         */
+        "no-caller": ["error"],
+
+        /**
+         * 建议 `else` 中不包含 `return`，这是一个不必要的 `else` 语句块
+         *
+         * @default ["off"]
+         */
+        "no-else-return": ["warn"],
+
+        /**
+         * 建议不使用空函数，如果当作占位符使用，需要在函数中添加注释
+         *
+         * @default ["off"]
+         */
+        "no-empty-function": ["off"],
+        "@typescript-eslint/no-empty-function": ["warn"],
+
+        /**
+         * 禁止使用 `eval` 执行代码，这可能会导致潜在的风险
+         *
+         * @default ["off"]
+         */
+        "no-eval": ["error"],
+
+        /**
+         * 禁止拓展原生对象，应当使用新的定义或方法
+         *
+         * @default ["off"]
+         */
+        "no-extend-native": ["error"],
+
+        /**
+         * 建议不使用非必要的 `bind` 方法，以降低性能损耗和代码阅读成本
+         *
+         * @default ["off"]
+         */
+        "no-extra-bind": ["warn"],
+
+        /**
+         * 建议不使用前导小数点和末尾小数点，这可能会被疏漏或误解
+         *
+         * 不推荐 `const a = .12`
+         *
+         * 推荐 `const a = 0.12`
+         *
+         * @default ["off"]
+         */
+        "no-floating-decimal": ["warn"],
+
+        /**
+         * 禁止隐式使用 `eval`
+         *
+         * @default ["off"]
+         */
+        "no-implied-eval": ["error"],
+
+        /**
+         * 禁止在类或类对象之外使用 `this`，有很大概率会出现 `this` 指向问题，还会增加理解成本
+         *
+         * @default ["off"]
+         */
+        "no-invalid-this": ["error"],
+
+        /**
+         * 禁止使用 `__iterator__` 属性来生成迭代器，应当使用 ES6 的迭代器和生成器
+         *
+         * @default ["off"]
+         */
+        "no-iterator": ["error"],
+
+        /**
+         * 禁止使用 `label` 标签语句，这一定会导致极其复杂且不可预测的条件控制流
+         *
+         * @default ["off"]
+         */
+        "no-labels": ["error"],
+
+        /**
+         * 建议不添加非必要的语句块、嵌套块，比如在文件开始时有一个空的语句块
+         *
+         * @default ["off"]
+         */
+        "no-lone-blocks": ["warn"],
+
+        /**
+         * 禁止在循环中使用不安全的函数调用或函数赋值合并
+         *
+         * @default ["off"]
+         */
+        "no-loop-func": ["error"],
+
+        /**
+         * 建议不使用连续的多个空格以增强可读性
+         *
+         * @default ["off"]
+         */
+        "no-multi-spaces": ["warn"],
+
+        /**
+         * 建议不使用非反引号包裹的多行字符串，这是一个非标准特性
+         *
+         * @default ["off"]
+         */
+        "no-multi-str": ["error"],
+
+        /**
+         * 建议不使用 `new Function` 的形式来构造函数，`new` 应当与 `class` 一同使用
+         *
+         * @default ["off"]
+         */
+        "no-new-func": ["warn"],
+
+        /**
+         * 建议不对 `String`, `Number`, `Boolean` 使用 `new` 操作符，基本类型应当直接定义
+         *
+         * @default ["off"]
+         */
+        "no-new-wrappers": ["warn"],
+
+        /**
+         * 禁止在字符串字中使用八进制转义，这是一个被弃用的特性
+         *
+         * @default ["off"]
+         */
+        "no-octal-escape": ["error"],
+
+        /**
+         * 禁止使用 `__proto__` 属性，这是一个被弃用的属性，应当使用 `Object.getPrototypeOf` 或 `Object.setPrototypeOf` 代替
+         *
+         * @default ["off"]
+         */
+        "no-proto": ["error"],
+
+        /**
+         * 建议不在返回语句中使用赋值操作，这可能是一个手误
+         *
+         * 比如要写 `return foo === a + b` 结果写成了 `return foo = a + b`
+         *
+         * @default ["off"]
+         */
+        "no-return-assign": ["warn"],
+
+        /**
+         * 建议不使用非必要的 `return await` 语句，这会带来额外的性能损耗
+         *
+         * 除非要使用 `try...catch...` 捕获错误
+         *
+         * @default ["off"]
+         */
+        "no-return-await": ["off"],
+        "@typescript-eslint/return-await": ["warn"],
+
+        /**
+         * 禁止自身比较自身，这大概率是个逻辑错误
+         *
+         * @default ["off"]
+         */
+        "no-self-compare": ["error"],
+
+        /**
+         * 建议不使用不包含使用不到的代码
+         *
+         * @default ["off"]
+         */
+        "no-unused-expressions": ["off"],
+        "@typescript-eslint/no-unused-expressions": ["warn", { "allowShortCircuit": true, "allowTernary": true, "allowTaggedTemplates": true }],
+
+        /**
+         * 建议不使用非必要的 `call` 和 `apply` 方法，这会导致额外的性能损耗
+         *
+         * @default ["off"]
+         */
+        "no-useless-call": ["warn"],
+
+        /**
+         * 建议不使用非必要的 `return` 语句，除非需要短路返回的特性
+         *
+         * @default ["off"]
+         */
+        "no-useless-return": ["warn"],
+
+        /**
+         * 这是一个提示项，避免长时间之后忘记这些 TODO 事项，默认的关键字有 `TODO`, `FIXME`, `WARN`, `TEST`, `XXX`
+         *
+         * 你可以在代码中使用 `// TODO: 要做的事` 来启用警告，这将有利于代码重构或优化
+         *
+         * @default ["off"]
+         */
+        "no-warning-comments": ["warn", { "terms": ["TODO", "FIXME", "WARN", "TEST", "XXX"] }],
+
+        /**
+         * 允许没有 `await` 的 `async` 函数，为接口预留拓展余地
+         */
+        "require-await": ["off"],
+        "@typescript-eslint/require-await": ["off"],
+
+        /**
+         * 建议将 IIFE 立即执行表达式的函数体定义通过括号包裹起来，避免出现语法歧义
+         *
+         * 如： `(() => { console.log("Hello, world!") })()`
+         *
+         * @default ["off"]
+         */
+        "wrap-iife": ["error", "inside"],
+
+        /**
+         * 建议不出现未使用过的变量，函数参数可以存在未使用的变量，以兼顾拓展性
+         *
+         * @default ["error"]
+         */
+        "no-unused-vars": ["off"],
+        "@typescript-eslint/no-unused-vars": ["warn", { "vars": "all", "args": "none", "ignoreRestSiblings": true }],
+
+        /**
+         * 禁止变量在定义之前被使用
+         *
+         * @default ["off"]
+         */
+        "no-use-before-define": ["error"],
+
+        /**
+         * 禁止使用 `new Buffer()` 构造函数，这是一个有危险漏洞的构造函数，建议使用 `Buffer.from`, `Buffer.alloc` 或 `Buffer.allocUnsafe` 代替
+         *
+         * @default ["off"]
+         */
+        "no-buffer-constructor": ["error"],
+
+        /**
+         * 建议使用一致的数组、括号换行风格，要么都换行，要么都不换行
+         *
+         * 推荐 `[1, 2, 3]`
+         *
+         * @default ["off"]
+         */
+        "array-bracket-newline": ["warn", "consistent"],
+
+        /**
+         * 建议在数组中不使用额外的空格
+         *
+         * 推荐 `[1, 2, 3]`
+         *
+         * 不推荐 `[ 1, 2, 3 ]`
+         *
+         * @default ["off"]
+         */
+        "array-bracket-spacing": ["warn", "never"],
+
+        /**
+         * 建议在代码块花括号左右有一个空格
+         *
+         * @default ["off"]
+         */
+        "block-spacing": ["warn", "always"],
+
+        /**
+         * 建议使用 `one-true-brace-style` 风格的大括号，如：
+         *
+         * ```typescript
+         * if (age < 18) {
+         *   doSomething("teen");
+         * } else if (age < 30) {
+         *   doSomething("young");
+         * } else {
+         *   doSomething("what else");
+         * }
+         * ```
+         *
+         * @default ["off"]
+         */
+        "brace-style": ["warn", "1tbs"],
+
+        /**
+         * 建议使用驼峰法命名规则
+         *
+         * @default ["off"]
+         */
+        "@typescript-eslint/naming-convention": [
+            "warn",
+            {
+                "selector": "default",
+                "format": ["camelCase"],
+            }, {
+                "selector": "variable",
+                "format": ["camelCase", "PascalCase", "UPPER_CASE"],
+            }, {
+                "selector": "parameter",
+                "format": ["camelCase", "PascalCase", "UPPER_CASE"],
+                "leadingUnderscore": "allow",
+            }, {
+                "selector": "memberLike",
+                "modifiers": ["private"],
+                "format": ["camelCase"],
+                "leadingUnderscore": "allow",
+            }, {
+                "selector": "memberLike",
+                "modifiers": ["static"],
+                "format": ["camelCase", "UPPER_CASE"],
+                "leadingUnderscore": "allow",
+            }, {
+                "selector": "classMethod",
+                "format": ["camelCase"],
+                "leadingUnderscore": "allow",
+            }, {
+                "selector": "typeLike",
+                "format": ["PascalCase"],
+            }, {
+                "selector": "objectLiteralProperty",
+                "format": ["camelCase", "PascalCase", "UPPER_CASE"],
+            }, {
+                "selector": "enumMember",
+                "format": ["camelCase", "PascalCase", "UPPER_CASE"],
+            },
+        ],
+
+        /**
+         * 建议使用拖尾逗号以增强 `git diff` 可读性，如：
+         *
+         * ```typescript
+         * const person = {
+         *   name: "小王",
+         *   age: 28,
+         *   sex: "男",
+         * }
+         * ```
+         *
+         * @default ["off"]
+         */
+        "comma-dangle": ["off"],
+        "@typescript-eslint/comma-dangle": ["warn", "always-multiline"],
+
+        /**
+         * 建议在逗号后面使用空格以增强可读性
+         *
+         * @default ["off"]
+         */
+        "comma-spacing": ["off"],
+        "@typescript-eslint/comma-spacing": ["warn", { "before": false, "after": true }],
+
+        /**
+         * 建议将逗号放在元素之后，而非一行开始
+         */
+        "comma-style": ["warn", "last"],
+
+        /**
+         * 建议不在计算属性内使用空格，类似数组的空格规则
+         *
+         * @default ["off"]
+         */
+        "computed-property-spacing": ["warn"],
+
+        /**
+         * 建议在文件末尾添加一个空行，以符合 `Unix` 文件规则
+         *
+         * @default ["off"]
+         */
+        "eol-last": ["warn", "always"],
+
+        /**
+         * 不建议在函数调用和标识符间有空格，也不建议调用和标识符不在同一行
+         *
+         * @default ["off"]
+         */
+        "func-call-spacing": ["off"],
+        "@typescript-eslint/func-call-spacing": ["warn", "never"],
+
+        /**
+         * 建议使用函数表达式来代替函数声明，可以避免 `function` 关键字带来的变量提升问题
+         *
+         * @default ["off"]
+         */
+        "func-style": ["warn", "expression"],
+
+        /**
+         * 建议使函数参数有一致的换行风格，即：该函数的参数要么全部换行，要么全部一行
+         *
+         * @default ["off"]
+         */
+        "function-paren-newline": ["warn", "multiline-arguments"],
+
+        /**
+         * 建议缩进级别为 4 个空格
+         *
+         * @default ["off"]
+         */
+        "indent": ["off"],
+        "@typescript-eslint/indent": ["warn", 4, { "SwitchCase": 1 }],
+
+        /**
+         * 建议在对象中的冒号后面有空格
+         *
+         * @default ["off"]
+         */
+        "key-spacing": ["warn"],
+
+        /**
+         * 建议在关键字周围有一个空格
+         *
+         * @default ["off"]
+         */
+        "keyword-spacing": ["off"],
+        "@typescript-eslint/keyword-spacing": ["warn", { "before": true, "after": true }],
+
+        /**
+         * 禁止使用 Windows 换行符 `\r\n`，应当统一使用 Unix 换行符 `\n`
+         *
+         * @default ["off"]
+         */
+        "linebreak-style": ["warn", "unix"],
+
+        /**
+         * 建议在块级注释之前有一行空行
+         *
+         * @default ["off"]
+         */
+        "lines-around-comment": ["warn", { "allowBlockStart": true, "allowObjectStart": true, "allowArrayStart": true, "allowClassStart": false }],
+
+        /**
+         * 建议在类成员之间有空行
+         *
+         * @default ["off"]
+         */
+        "lines-between-class-members": ["off"],
+        "@typescript-eslint/lines-between-class-members": ["warn", "always"],
+
+        /**
+         * 建议对多行注释使用 `separate-lines` 风格，即单行文本注释
+         *
+         * JSDoc 为当前文件的注释风格
+         *
+         * @default ["off"]
+         */
+        "multiline-comment-style": ["warn", "separate-lines"],
+
+        /**
+         * 建议三元操作符保持一致的换行，即要么多行要么一行
+         *
+         * @default ["off"]
+         */
+        "multiline-ternary": ["warn", "always-multiline"],
+
+        /**
+         * 禁止构造函数不加括号的写法，会造成混淆
+         *
+         * @default ["off"]
+         */
+        "new-parens": ["error"],
+
+        /**
+         * 建议在长调用链中添加换行，以增强可读性
+         *
+         * @default ["off"]
+         */
+        "newline-per-chained-call": ["warn"],
+
+        /**
+         * 建议不使用 `Array` 的多参数构造函数，这是一个设计上的缺陷，容易造成混淆
+         *
+         * 建议使用 `Array.from` 或 `new Array(length)` 来构造函数
+         */
+        "no-array-constructor": ["off"],
+        "@typescript-eslint/no-array-constructor": ["warn"],
+
+        /**
+         * 建议不在 `else` 块中使用单独的 `if`，这种情况可以使用 `else if` 来代替
+         *
+         * @default ["off"]
+         */
+        "no-lonely-if": ["warn"],
+
+        /**
+         * 建议连续空行的数量最大为 2 以增强代码紧凑性，文件开头没有空行，文件末尾有且只有一个空行，搭配 `eol-last` 规则一同生效
+         *
+         * @default ["off"]
+         */
+        "no-multiple-empty-lines": ["warn", { "max": 2, "maxEOF": 1, "maxBOF": 0 }],
+
+        /**
+         * 建议不使用 `new Object` 构造对象，应当使用 `Object.create` 或 `{}` 赋值
+         *
+         * @default ["off"]
+         */
+        "no-new-object": ["warn"],
+
+        /**
+         * 禁止使用自增自减的一元操作符，避免混淆以及各种理解上的困难
+         *
+         * @default ["off"]
+         */
+        "no-plusplus": ["error"],
+
+        /**
+         * 建议不在行尾添加额外的空格
+         *
+         * @default ["off"]
+         */
+        "no-trailing-spaces": ["warn"],
+
+        /**
+         * 建议尽可能的使用简单的三元操作符
+         *
+         * @default ["off"]
+         */
+        "no-unneeded-ternary": ["warn"],
+
+        /**
+         * 建议不在属性前留有空白，以增强可读性
+         *
+         * @default ["off"]
+         */
+        "no-whitespace-before-property": ["warn"],
+
+        /**
+         * 建议大括号内使用空格
+         *
+         * @default ["off"]
+         */
+        "object-curly-spacing": ["off"],
+        "@typescript-eslint/object-curly-spacing": ["warn", "always"],
+
+        /**
+         * 建议大括号内使用换行符
+         *
+         * @default ["off"]
+         */
+        "object-curly-newline": ["warn", { "consistent": true }],
+
+        /**
+         * 建议将对象的属性放在同一行或一行一个
+         *
+         * @default ["off"]
+         */
+        "object-property-newline": ["warn", { "allowAllPropertiesOnSameLine": true }],
+
+        /**
+         * 建议每个变量有一个单独的声明语句
+         *
+         * @default ["off"]
+         */
+        "one-var": ["warn", "never"],
+
+        /**
+         * 建议操作符都在行首，以增强可读性
+         *
+         * @default ["off"]
+         */
+        "operator-linebreak": ["warn", "before"],
+
+        /**
+         * 建议在合适的地方增加空行以增强可读性
+         *
+         * @default ["off"]
+         */
+        "padded-blocks": ["warn", { "classes": "always" }, { "allowSingleLineBlocks": true }],
+
+        /**
+         * 建议优先使用对象拓展而非 `Object.assign`
+         *
+         * @default ["off"]
+         */
+        "prefer-object-spread": ["warn"],
+
+        /**
+         * 建议仅在需要时才为对象字面量属性名称使用引号，以兼顾可读性和严格性
+         *
+         * @default ["off"]
+         */
+        "quote-props": ["warn", "as-needed"],
+
+        /**
+         * 建议尽可能的使用单引号，允许在字符串内含有单引号的前提下使用双引号或反引号
+         *
+         * @default ["off"]
+         */
+        "quotes": ["off"],
+        "@typescript-eslint/quotes": ["warn", "single", { "avoidEscape": true }],
+
+        /**
+         * 建议不加非必要的分号
+         *
+         * @default ["off"]
+         */
+        "semi": ["off"],
+        "@typescript-eslint/semi": ["warn", "never"],
+
+        /**
+         * 建议必要分号之后有空格，以增强可读性
+         *
+         * @default ["off"]
+         */
+        "semi-spacing": ["warn"],
+
+        /**
+         * 建议必要的分号出现在行首，搭配 `semiless` 风格使用，如：
+         *
+         * ```typescript
+         * const arr = [1, 2, 3]
+         * ;(() => console.log("IIFE"))()
+         * ```
+         *
+         * @default ["off"]
+         */
+        "semi-style": ["warn", "first"],
+
+        /**
+         * 建议语句块之前有空格
+         *
+         * @default ["off"]
+         */
+        "space-before-blocks": ["warn", "always"],
+
+        /**
+         * 建议在函数左括号之前使用一致的空格
+         *
+         * @default ["off"]
+         */
+        "space-before-function-paren": ["off"],
+        "@typescript-eslint/space-before-function-paren": [
+            "warn",
+            {
+                "anonymous": "always",
+                "named": "never",
+                "asyncArrow": "always",
+            },
+        ],
+
+        /** 建议在小括号内没有额外的空格 */
+        "space-in-parens": ["warn", "never"],
+
+        /** 建议在操作符周围有空格 */
+        "space-infix-ops": ["off"],
+        "@typescript-eslint/space-infix-ops": ["warn"],
+
+        /** 建议在一元操作符前后没有空格 */
+        "space-unary-ops": ["warn"],
+
+        /** 建议在注释前有空格 */
+        "spaced-comment": ["warn", "always"],
+
+        /** 建议在 `switch-case` 子句的冒号左右没有额外的空格 */
+        "switch-colon-spacing": ["warn"],
+
+        /** 建议模版标记调用不加额外空格 */
+        "template-tag-spacing": ["warn"],
+
+        /** 建议箭头函数尽可能的精简短练 */
+        "arrow-body-style": ["warn", "as-needed"],
+        "arrow-parens": ["warn", "as-needed"],
+        "arrow-spacing": ["warn"],
+
+        /** 建议不重复导入模块 */
+        "no-duplicate-imports": ["off"],
+        "@typescript-eslint/no-duplicate-imports": ["warn"],
+
+        /** 建议不在对象中使用非必要的计算属性 */
+        "no-useless-computed-key": ["warn"],
+
+        /** 建议不使用非必要的构造函数 */
+        "no-useless-constructor": ["off"],
+        "@typescript-eslint/no-useless-constructor": ["warn"],
+
+        /** 建议不使用非必要的导入导出重命名 */
+        "no-useless-rename": ["warn"],
+
+        /** 禁止使用 `var` 关键字 */
+        "no-var": ["error"],
+
+        /**
+         * 建议对象字面量中使用一致的简写语法，且尽可能的使用简写语法
+         *
+         * @default ["off"]
+         */
+        "object-shorthand": ["warn", "consistent-as-needed"],
+
+        /** 建议在回调函数中使用箭头函数 */
+        "prefer-arrow-callback": ["warn"],
+
+        /** 建议使用 `const` 声明不修改的变量 */
+        "prefer-const": ["warn"],
+
+        /**
+         * 禁止使用 `parseInt` 以避免某些易混淆的写法，建议使用转换符 `+` 或 `Number` 函数
+         *
+         * @default ["off"]
+         */
+        "prefer-numeric-literals": ["error"],
+
+        /** 建议使用剩余参数而非 `arguments` */
+        "prefer-rest-params": ["warn"],
+
+        /** 建议使用拓展语法 `...` 代替 `apply` 调用 */
+        "prefer-spread": ["warn"],
+
+        /** 建议剩余操作符、扩展运算符与其他表达式之间没有额外的空格 */
+        "rest-spread-spacing": ["warn"],
+
+        /** 建议定义 `symbol` 时有描述 */
+        "symbol-description": ["warn"],
+
+        /** 建议模版字符串中的嵌入表达式没有额外的空格 */
+        "template-curly-spacing": ["warn"],
+
+        // TypeScript 特定规则
+        /** 建议使用中括号的方式定义数组类型 */
+        "@typescript-eslint/array-type": ["warn", { "default": "array", "readonly": "array" }],
+
+        /** 建议使用 readonly field 的方式代替 getter */
+        "@typescript-eslint/class-literal-property-style": ["warn"],
+
+        /** 建议使用 Record 类型代替索引签名对象 */
+        "@typescript-eslint/consistent-indexed-object-style": ["warn"],
+
+        /** 建议使用 `as` 关键字代替尖括号类型断言 */
+        "@typescript-eslint/consistent-type-assertions": ["warn", { "assertionStyle": "as", "objectLiteralTypeAssertions": "allow" }],
+
+        /** 建议使用 `import type ABC from ".."` 的方式引入类型定义以减少性能损耗 */
+        "@typescript-eslint/consistent-type-imports": ["warn", { "prefer": "type-imports" }],
+
+        /** 建议在单行类型定义中使用逗号，多行类型定义中不加分号，与代码风格保持一致 */
+        "@typescript-eslint/member-delimiter-style": ["warn", {
+            "multiline": {
+                "delimiter": "none",
+                "requireLast": false,
+            },
+            "singleline": {
+                "delimiter": "comma",
+                "requireLast": false,
+            },
+        }],
+
+        /** 建议使用函数风格定义接口中的函数属性 */
+        "@typescript-eslint/method-signature-style": ["warn"],
+
+        /** 建议直接使用函数代替工具类 class */
+        "@typescript-eslint/no-extraneous-class": ["warn"],
+
+        /** 建议不在非返回类型中使用 void 类型 */
+        "@typescript-eslint/no-invalid-void-type": ["warn"],
+
+        /** 建议不要在合并空值运算符 `??` 左侧使用非空断言 `!`，这是没有必要的操作 */
+        "@typescript-eslint/no-non-null-asserted-nullish-coalescing": ["warn"],
+
+        /** 建议在定义枚举类型时初始化所有值 */
+        "@typescript-eslint/prefer-enum-initializers": ["warn"],
+
+        /** 建议使用 `for...of` 代替 `for...i` 在数组中的循环 */
+        "@typescript-eslint/prefer-for-of": ["warn"],
+
+        /** 建议使用可选链操作符代替 `&&` 进行可选取值操作 */
+        "@typescript-eslint/prefer-optional-chain": ["warn"],
+
+        /** 建议使用联合类型代替函数重载 */
+        "@typescript-eslint/unified-signatures": ["warn"],
+
+        /** 可以使用 require 导入，因为项目中有些内容需要从全局的 global.js 中导入 */
+        "@typescript-eslint/no-var-requires": ["off"],
+
+        /** 建议在类型定义中插入适当的空格 */
+        "@typescript-eslint/type-annotation-spacing": ["warn"],
+
+        /** 建议对联合类型进行排序 */
+        "@typescript-eslint/sort-type-union-intersection-members": ["warn"],
+
+        /** 建议不使用 any 定义类型，使用 unknown 代替 */
+        "@typescript-eslint/no-explicit-any": ["warn", { "fixToUnknown": true }],
+
+        /** 允许使用单独的 Promise 而不 await，比如执行异步任务 */
+        "@typescript-eslint/no-floating-promises": ["off"],
+
+        /** 允许 any 类型的参数 */
+        "@typescript-eslint/no-unsafe-argument": ["off"],
+
+        /** 允许将为 any 的值赋给已有类型的变量 */
+        "@typescript-eslint/no-unsafe-assignment": ["off"],
+
+        /** 允许将 any 类型的变量当作参数传入 */
+        "@typescript-eslint/no-unsafe-call": ["off"],
+
+        /** 允许访问类型为 any 的对象的成员 */
+        "@typescript-eslint/no-unsafe-member-access": ["off"],
+
+        /** 允许返回 any 类型的值，但要求已定义函数返回类型 */
+        "@typescript-eslint/no-unsafe-return": ["off"],
+
+        /** 允许在模版字符串中传入任意类型的值 */
+        "@typescript-eslint/restrict-template-expressions": ["off"],
+
+        /** 允许额外的类型注释，可以做为条件约束 */
+        "@typescript-eslint/no-inferrable-types": ["off"],
+
+        /** 允许使用拼接操作符 `+` 拼接任意类型的数据，严格限制会大幅降低代码灵活度 */
+        "@typescript-eslint/restrict-plus-operands": ["off"],
+    },
+}
