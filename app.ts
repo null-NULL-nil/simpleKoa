@@ -1,7 +1,6 @@
 import * as Koa from "koa";
-
+import {  } from "koa-router";
 const app: Koa = new Koa();
 
-export default class {
 
-}
+app.listen(3000);
